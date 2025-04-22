@@ -1,0 +1,337 @@
+%-------------------------
+% Resume in Latex
+% Author : Bilal Khan
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+%-------------------------
+% Difference:
+% - Added Cohere X Opensesame hackathon win -> shortened Vosyn
+% - Updated Ericsson description + Updated technologies
+% - New Ericsson skills
+%
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{graphicx}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage{fontawesome}
+\usepackage{tikz}
+\usetikzlibrary{svg.path}
+
+\definecolor{mypink3}{cmyk}{0, 0.7808, 0.4429, 0.1412}
+\definecolor{cvblue}{HTML}{bf3228}
+\definecolor{black}{HTML}{130810}
+\definecolor{darkcolor}{HTML}{0F4539}
+\definecolor{cvgreen}{HTML}{3BD80D}
+\definecolor{taggreen}{HTML}{00E278}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\colorlet{name}{black}
+\colorlet{tagline}{darkcolor}
+\colorlet{heading}{darkcolor}
+\colorlet{headingrule}{cvblue}
+\colorlet{accent}{darkcolor}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+% \pagestyle{fancy}
+% \fancyhf{}  % clear all header and footer fields
+% \fancyfoot{}
+% \renewcommand{\headrulewidth}{0pt}
+% \renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{\large#1} & \textbf{\small #2} \\
+      \textit{\large#3} & \textit{\small #4} \\
+      
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+
+\newcommand\sbullet[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+
+
+\begin{center}
+    {\Huge \scshape Muhammad Bilal Khan} \\ \vspace{1pt} Toronto, Ontario, Canada\\ \vspace{2pt}
+    \small  \href{mailto:02.mbilalkhan@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{02.mbilalkhan@gmail.com}} ~ \href{tel:+1 647-989-6112}{ \raisebox{-0.1\height}\faPhone\ \underline{+1 647-989-6112} ~}
+    \href{https://www.linkedin.com/in/bilal-khan1548/}{\raisebox{-0.2\height}\faLinkedinSquare\ \underline{bilal-khan1548}}  ~
+    \href{https://github.com/m-bilu}{\raisebox{-0.2\height}\faGithub\ \underline{m-bilu}} ~
+    {\raisebox{-0.2\height} \ \href{https://mbilalkhan.vercel.app/}{\textcolor{orange}{\underline{Personal Website}}}
+    \vspace{-5pt}
+\end{center}
+
+ %-----------EDUCATION-----------
+\section{\href{https://github.com/m-bilu/data-set-analysis-coursework}{EDUCATION}}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+    {\href{https://drive.google.com/file/d/1QEfgK4heOBgUVTgv2YxT5KoPsnaf-hhB/view?usp=sharing}{\textcolor{cvblue}{University of Waterloo - Honours Mathematics}}}{06 2020 - 06 2025}{\href{https://github.com/m-bilu/data-set-analysis-coursework}{\underline{Double Major in Statistics, Computational Math, Minor in Optimization}}}
+
+      \resumeItemListStart
+        \resumeItem{
+        \href{https://github.com/m-bilu/certs}{\textbf{Coursework}: Big Data, Machine Learning, Probability, Discrete Mathematics, Optimization, Data Structures, Algorithms, Operating Systems, Distributed Systems. President's Scholarship: \textbf{\$5000}.
+        }}
+      \resumeItemListEnd
+      \vspace{-5pt}
+      
+      \resumeSubHeadingListEnd
+
+%-----------PROGRAMMING SKILLS-----------
+\section{TECHNICAL SKILLS}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+
+    \textbf{\textcolor{cvblue}{Languages:}}{ Python, C++, Java, JavaScript, TypeScript, SQL, R, Git, Bash, MatLab.}
+
+
+    \textbf{\textcolor{cvblue}{Tools:}}{ Tensorflow, Keras, PyTorch, CUDA, Apache, PostGres, MongoDB, Firebase, Grafana, Prometheus, Loki, AWS, GCP, Azure, React.JS, Node.JS, Flask, FastAPI, Django, Jenkins, Ansible, Docker, Kubernetes, Nginx, CI/CD}
+     
+    }}
+    \vspace{0pt}
+    
+ \end{itemize}
+ \vspace{-15pt}
+
+
+
+%-----------EXPERIENCE-----------
+\section{WORK EXPERIENCES}
+  \resumeSubHeadingListStart
+
+   \resumeSubheading
+      {\href{https://www.ericsson.com/en}{\textbf{\large{\textcolor{cvblue}{Ericsson}}}} {\medium{}{{\textcolor{cvblue}{}}}} \medium{}}{04 2024 -- Ongoing} 
+      {\underline{5G Software Developer Intern, CloudRAN Development Team}}{Kanata, ON, Canada}
+      \resumeItemListStart
+      \vspace{3pt}
+
+        \resumeItem{Delivered a network monitoring service covering \textbf{15TB} of device metrics; Prometheus/SNMP ETL for real-time metrics collection, visualizing network usage on Grafana. This is automatically scaled using Openshift to cover \textbf{5000} devices.}
+
+        \resumeItem{Leveraged this to develop an \textbf{agentic RAG-based} flow with \textbf{Langchain/Llama3}, automating sub-network reuse to optimize utilization across existing infrastructure, reducing manual hardware ordering/configuration by \textbf{40\%}.}
+
+        
+        
+        \vspace{1pt}       
+
+        %% Exact tools I have engineered so far, and with what stack. Scope of help (money saved, ppl helped)
+        \resumeItem{Developed an \textbf{IaaS} tool which automates hardware ordering, promoting efficient hardware reservation. \textbf{\$1M} projected savings in \textbf{OpEx}. Provided end-to-end solution with system design and ETL pipeline and deployment on \textbf{AWS} EC2.}
+
+        \vspace{1pt}
+
+        %% STAICE
+        \resumeItem{Contributed to \textbf{RL}-based Test Channel scheduling, deployment. Deep Q-learning with MDPs, OpenAI PPO, Tensorflow. Replaced manual scheduling workflow, saving \textbf{10 hours per channel deployment}.}
+
+        
+
+        \vspace{1pt}
+
+         
+
+        
+        
+      \resumeItemListEnd 
+      \vspace{3pt}
+
+      \resumeSubheading
+          {\href{https://shorturl.at/CNQqc}{\textbf{\large{\textcolor{cvblue}{Department of Statistics, University of Waterloo}}}}\medium{\textcolor{cvblue}{}}}{07 2023 -- 12 2023}
+          {\underline{Published Research Assistant}}{Waterloo, ON, Canada}
+          \resumeItemListStart
+          \vspace{3pt}
+
+          %% General Intro, what did I do
+          \resumeItem{Pioneered distributed estimation for diagnostics meta-data-analyses in healthcare with \textcolor{cvblue}{\href{https://uwaterloo.ca/scholar/znegeri/home}{Zelalem Negeri}} \& NSERC's \textbf{\$10,000} grant. Built deep learning algorithm in Python/R for bivariate binomial-normal model.}
+          
+
+          %% Technicals
+          \resumeItem{Built data scraping, data wrangling pipeline in Python, Kafka to accumlate \textbf{9,000} studies from Cochrane Database. }
+
+          \vspace{1pt}
+
+          %% Impact: So what?
+          \resumeItem{Identified relationship between method choice and data characteristics, provided recommendations for method usage and future directions of investigation. Presented paper to \textbf{est. 200} international academics at {\href{https://uwaterloo.ca/joint-research-conference-statistics-quality-industry-technology/}{\textcolor{cvblue}{JRC 2024}}} Student Award.}
+
+          
+          \resumeItemListEnd
+
+
+   \resumeSubheading
+      {\href{https://vosyn.ai/}{\textbf{\large{\textcolor{cvblue}{Vosyn}}}} {\medium{}{{\textcolor{cvblue}{}}}} \medium{}}{06 2023 -- 10 2023} 
+      {\underline{Machine Learning Engineer}}{Etobicoke, ON, Canada}
+      \resumeItemListStart
+      \vspace{3pt}
+
+
+        %% General Intro to MVP for Voice Synth products, Voice Pretrained Transformer, Data Pipelines
+        \resumeItem{Developed MVP for multimodal voice synthesis VLM. Implemented CUDA-optimized GPU kernels to accelerate inference by 15\%. Efficient Trained models on local TPU using XLA/MLIR. Presented in funding rounds, evaluated at \textbf{\$36.4M.}}
+
+        %% Collaboration, funding, startup
+        \resumeItem{Executed \textbf{60M}-param audio translation model. Established streaming ETL data pipelines for \textbf{10,000} hrs of audio.}
+
+        \vspace{1pt}
+
+        %% Leadership, team stuff
+        \resumeItem{Led a subteam of \textbf{7 developers} in a fast-paced startup environment. Subteam grew \textf{200\%} over \textbf{4 months}; Managed Agile environment on Jira, Confluence, Gerrit with custom CI/CD flow; \textbf{20\%} increase in sprint velocity. }
+        
+
+        \vspace{1pt}
+
+        %% Literature review required for development - key ML concepts, papers, TTS systems        
+        \resumeItem{Implemented literature on open-source TTS systems, transformer architecture, QLora and quantized models for cost-effective LLM training led to a \textbf{20\%} reduction in NVIDIA V100 compute, lowering \textbf{OpEx} by \textbf{\$1000}/month.}
+
+        \vspace{1pt}      
+
+        
+        
+      \resumeItemListEnd 
+            \vspace{-5pt}
+    
+
+
+%-----------PROJECTS-----------
+\section{AWARDS \& ACHIEVEMENTS}
+\vspace{-5pt}
+
+        \resumeProjectHeading
+          {\href{}{}  \medium{\textcolor{cvblue}{}{}}}
+
+          \vspace{-35pt}
+           
+          \resumeItemListStart
+
+        \resumeItem{\href{https://github.com/Duo-Keyboard-Koalition/Syntaxtual}{\textcolor{cvblue}{\textbf{{1st Place @ Cohere x OpenSesame}}}: Won hackathon by developing Syntaxtual, an LLM-RAG-powered agentic application for live code review in VS Code with repository-level context, allowing for conversational issue resolution.}}
+
+        \vspace{5pt}
+
+
+
+        \resumeItem{\href{https://github.com/m-bilu/MAG-WildfireHackathon}{\textcolor{cvblue}{\textbf{{2nd Place @ MAG Aerospace Wildfire Hackathon}}}: Predicted \textbf{10 days} of future fire growth for Alberta's \textbf{Jasper Wildfire} with topography, fire fuel, and fire hotspot raster data. \textbf{Published} in UW Data \& AI Institute 
+ {\href{shorturl.at/wdxOb}{\textcolor{cvblue}{Newsletter}}}}.}
+        
+        \vspace{5pt}
+
+        \resumeItem{\href{https://watai.ca/#/contact}{\textcolor{cvblue}{\textbf{{MedChat @ Waterloo.AI}}}: Built LLM chatbot finetuned on PubMed literature at \textbf{largest undergraduate AI research} hub in Canada. Achieves \textbf{75\%} accuracy on symptoms/diagnosis benchmark with agentic RAG, Llama 3.}}
+
+        \vspace{5pt}
+
+        \resumeItem{\href{https://www.uoft.ai/projectx}{\textcolor{cvblue}{\textbf{{ProjectX @ UofT AI}}}: Representing UWaterloo at 3 month research hackathon on multimodal co-learning, data fusion. Focusing on multi-messenger models for neutrino detection. Submission paper also awaiting journal publishing.}}
+        
+        \vspace{5pt} 
+
+
+        \resumeItem{\href{https://globalspark.world/}{\textcolor{cvblue}{\textbf{{Lead Developer @ Global Spark, BCG}}}: Developed NLP-based ATS system for HackTheGlobe applications by finetuning Cohere R7B with AutoML and dataset generation. Hosting workshops on LLMs, Computer Vision, mentoring.}}
+        
+        \vspace{5pt} 
+
+        
+          \resumeItemListEnd 
+         \vspace{-12pt}
+
+
+    \vspace{-5pt}
+  
+
+
+
+
+\end{document}

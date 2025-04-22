@@ -1,0 +1,34 @@
+JOB DESCRIPTION
+
+
+
+The Quantitative Model Developer is an experienced model developer with strong technical, quantitative, and analytical skills. Developed communication skills required in order to negotiate collaborate with other team members.
+
+
+Location: 100% Remote - Must work in EST/CST hours
+
+
+
+Responsibilities:
+
+Build best-in-class models for a variety of macroeconomics and concepts, such as money supply, exchange rates, interest rates, credit spreads, etc.
+Independently execute model development processes. Obtain and clean data, estimate models, perform back testing and other model testing, and document the model development process
+Utilize Python to build and test statistical models. Write clean, efficient, and well-documented code.
+
+
+Qualifications:
+
+3+ years of post-PhD work experience, or 5+ years of post-Master’s work experience
+Strong understanding of quantitative model development approaches, obtained through model development experience at a peer financial institution
+Experience independently executing model development projects
+Strong knowledge of econometrics, with some knowledge of time series econometrics.
+Practical experience writing programs to build and test predictive models
+Proficient in Python
+Some understanding of economic concepts is useful
+Self-motivated and detail oriented
+Demonstrated project management and organizational skills and capability to handle multiple projects at one time
+
+
+Education:
+
+Master's degree required, Ph.D. preferred

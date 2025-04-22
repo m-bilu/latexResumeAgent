@@ -1,0 +1,6 @@
+*pat
+*key*
+env
+env/*
+*pycache*
+*secrets*
