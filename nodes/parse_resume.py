@@ -12,28 +12,31 @@ import nodes.config as config
 ## --- Classical Python Method Tools, no LLM/Agents ---
 ##
 
-def find_ending_brace(string: str, start: int) -> int:
-    '''
-    Given a string and the index of an opening brace, returns the index of the matching closing brace.
-    Supports nested braces.
-    '''
-    stack = []
-    opening = string[start]
-    closing = {'{': '}', '[': ']', '(': ')'}[opening]
-
-    for i in range(start, len(string)):
-        if string[i] == opening:
-            stack.append(opening)
-        elif string[i] == closing:
-            stack.pop()
-            if not stack:
+def find_ending_brace(s: str, start: int) -> int:
+    # Handles nested braces
+    if s[start] not in "{[":
+        return -1
+    open_brace = s[start]
+    close_brace = "}" if open_brace == "{" else "]"
+    count = 0
+    for i in range(start, len(s)):
+        if s[i] == open_brace:
+            count += 1
+        elif s[i] == close_brace:
+            count -= 1
+            if count == 0:
                 return i
-    return -1  # unmatched brace
+    return -1
+
 
 def remove_unnecessary_tags(content: str, tag_types: List[Tuple[str, bool]] = config.TAG_TYPES) -> str:
     '''
-    Removes specified LaTeX tags. If remove_inner is True, removes both the tag and its content.
-    If remove_inner is False, removes the tag but keeps its inner content.
+    Removes specified LaTeX tags from a string.
+    Each tag is a tuple (tag_name, remove_inner), where:
+    - tag_name is the LaTeX command (without the backslash),
+    - remove_inner determines whether to delete the content inside the braces.
+    
+    In both cases, the surrounding braces are removed.
     '''
     i = 0
     result = ''
@@ -44,12 +47,14 @@ def remove_unnecessary_tags(content: str, tag_types: List[Tuple[str, bool]] = co
                 if content.startswith(tag, i + 1):
                     matched = True
                     i += len(tag) + 1  # move past the \tag
+
                     # Optional argument in brackets
                     if i < len(content) and content[i] == "[":
                         end_opt = find_ending_brace(content, i)
                         if end_opt == -1:
                             break
                         i = end_opt + 1
+
                     # Required argument in braces
                     if i < len(content) and content[i] == "{":
                         end_brace = find_ending_brace(content, i)
@@ -57,10 +62,10 @@ def remove_unnecessary_tags(content: str, tag_types: List[Tuple[str, bool]] = co
                             break
                         inner = content[i+1:end_brace]
                         if not remove_inner:
-                            # Clean inner content recursively
+                            # Clean inner content recursively (but don't keep braces)
                             cleaned_inner = remove_unnecessary_tags(inner, tag_types)
                             result += cleaned_inner
-                        # If remove_inner is True, we skip the inner content
+                        # Whether inner is removed or not, skip the entire {...}
                         i = end_brace + 1
                     break
             if not matched:
@@ -70,6 +75,7 @@ def remove_unnecessary_tags(content: str, tag_types: List[Tuple[str, bool]] = co
             result += content[i]
             i += 1
     return result
+
 
 def parse_sections(content: str) -> Dict[str, str]:
     '''
@@ -140,6 +146,7 @@ def parse_resumeitems(content: str) -> List[str]:
     '''
     items = []
     tag = "\\resumeItem{"
+            
     i = 0
 
     while i < len(content):

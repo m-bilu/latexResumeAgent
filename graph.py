@@ -27,7 +27,6 @@ def parse_resume_node(state: AgentState) -> AgentState:
     for section, tex in sections.items():
         sections[section] = parse_resume.parse_subheadings(tex)
     
-    
     return {**state, 'resume_sections': sections}
 
 def parse_jd_node(state: AgentState) -> AgentState:

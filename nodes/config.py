@@ -11,5 +11,6 @@ TAG_TYPES = [
     ('medium', False), 
     ('small', False), 
     ('underline', False),
-    ('vspace', True)
+    ('vspace', True),
+    ('resumeItemListStart', False)
     ]
