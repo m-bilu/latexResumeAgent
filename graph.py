@@ -1,12 +1,10 @@
 from langchain_cohere import ChatCohere
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.state import CompiledStateGraph
+from langchain_core.runnables import RunnableLambda
 
 from schema import AgentState
-from nodes import parse_resume
-
-## --- Main LLM ---
-llm = ChatCohere(model="command-r-plus", temperature=0)
+from nodes import parse_resume, parse_jd
 
 ## --- Nodes of High-Level Agent Graph ---
 ##
@@ -33,11 +31,33 @@ def parse_jd_node(state: AgentState) -> AgentState:
     '''
     This node parses string of job description and identifies skills at various strata
     Strata as in:
-    1) low-level skills like tools, languages
-    2) high-level skills like workflows, disciplines 
+    - jd summary
+    - low-level skills like tools, languages (Hard|Soft)
+    - high-level skills like workflows, disciplines 
         (data engineering vs data science vs ai engineering vs applied mle)
+    - preferred background
+    - key responsibilities (can the resume person fulfil them?)
+    - keywords
+
+    Next Steps:
+    - RAG for company info, uncommon terms, similar job postings
+    - use Output for Post Parse Validation (is the llm's output in the jd)
     '''
-    pass
+    chain, output_parser = parse_jd.get_details_llmchain()
+
+    insights = chain.invoke({
+        "job_description": state['jd'],
+        "schema": output_parser.get_format_instructions()
+    })
+
+    return {**state, "jd_sections" : insights}
+
+    
+
+
+    
+
+    
 
 def identify_pros_cons_node(state: AgentState) -> AgentState:
     '''

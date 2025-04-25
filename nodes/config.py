@@ -1,8 +1,12 @@
 '''
 holds constants used in nodes .py files
 '''
+from langchain.prompts import PromptTemplate
 
-### parse_resume constants
+##
+## --- PARSE_RESUME CONSTANTS --- ##
+## 
+
 TAG_TYPES = [
     ('href', True), 
     ('textbf', False), 
@@ -14,3 +18,4 @@ TAG_TYPES = [
     ('vspace', True),
     ('resumeItemListStart', False)
     ]
+

@@ -166,3 +166,4 @@ def parse_resumeitems(content: str) -> List[str]:
 ## --- LLMChains ---
 ##
 
+## INCOMING, V1 will only use the structured json parsed from .tex, with no LLM insights
