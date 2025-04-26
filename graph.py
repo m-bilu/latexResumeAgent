@@ -4,7 +4,7 @@ from langgraph.graph.state import CompiledStateGraph
 from langchain_core.runnables import RunnableLambda
 
 from schema import AgentState
-from nodes import parse_resume, parse_jd
+from nodes import parse_resume, parse_jd, identify_pros_cons
 
 ## --- Nodes of High-Level Agent Graph ---
 ##
@@ -43,20 +43,14 @@ def parse_jd_node(state: AgentState) -> AgentState:
     - RAG for company info, uncommon terms, similar job postings
     - use Output for Post Parse Validation (is the llm's output in the jd)
     '''
-    chain, output_parser = parse_jd.get_details_llmchain()
+    chains = parse_jd.get_details_llmchain()
 
-    insights = chain.invoke({
-        "job_description": state['jd'],
-        "schema": output_parser.get_format_instructions()
-    })
+    insights = {target : chain.invoke({
+        "job_description": state['jd']#,
+        #"schema": output_parser.get_format_instructions()
+    }).content for target, chain in chains.items()}
 
     return {**state, "jd_sections" : insights}
-
-    
-
-
-    
-
     
 
 def identify_pros_cons_node(state: AgentState) -> AgentState:
@@ -70,7 +64,7 @@ def identify_pros_cons_node(state: AgentState) -> AgentState:
     NOTE: for demo, if changes require info not in resume/datasource, will create new info
         for resume edits (may not be true).
     '''
-    pass
+    
 
 def make_resume_edits_node(state: AgentState) -> AgentState:
     '''
