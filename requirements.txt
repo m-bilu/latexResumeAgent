@@ -1,4 +1,5 @@
 langchain
+langchain-core
 langchain-cohere
 cohere
 

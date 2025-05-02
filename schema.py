@@ -12,6 +12,8 @@ class AgentState(TypedDict):
     resume_sections: Dict[str, Dict]
     jd_sections: Dict[str, List[str]]
 
+    suggestions: str
+
     new_resume: str ## latex, to return at the end
 
 

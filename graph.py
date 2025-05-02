@@ -64,6 +64,14 @@ def identify_pros_cons_node(state: AgentState) -> AgentState:
     NOTE: for demo, if changes require info not in resume/datasource, will create new info
         for resume edits (may not be true).
     '''
+    chain = identify_pros_cons.get_suggestions_llmchains()
+
+    insight = chain.invoke({
+        "jd_details" : state['jd_sections'],
+        'resume_details' : state['resume_sections']
+    }).content
+
+    return {**state, "suggestions": insight}
     
 
 def make_resume_edits_node(state: AgentState) -> AgentState:
@@ -91,6 +99,7 @@ def init_agent() -> CompiledStateGraph:
 
     graph.add_edge(START, "parse_resume_node")
     graph.add_edge("parse_resume_node", "parse_jd_node")
+    graph.add_edge("parse_jd_node", "identify_pros_cons_node")
     graph.add_edge("identify_pros_cons_node", "make_resume_edits_node")
     graph.add_edge("make_resume_edits_node", END)
 
