@@ -14,8 +14,6 @@ class AgentState(TypedDict):
 
     suggestions: str
 
+    new_resume_unvalidated: str
     new_resume: str ## latex, to return at the end
 
-
-
-     

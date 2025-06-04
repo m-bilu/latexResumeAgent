@@ -8,15 +8,15 @@ from langchain.prompts import PromptTemplate
 ## 
 
 TAG_TYPES = [
-    ('href', True), 
-    ('textbf', False), 
-    ('textcolor', True), 
-    ('large', False), 
-    ('medium', False), 
-    ('small', False), 
-    ('underline', False),
-    ('vspace', True),
-    ('resumeItemListStart', False)
+    # ('href', True), 
+    # ('textbf', False), 
+    # ('textcolor', True), 
+    # ('large', False), 
+    # 'medium', False), 
+    # ('small', False), 
+    # ('underline', False),
+    # ('vspace', True),
+    # ('resumeItemListStart', False)
     ]
 
 ##

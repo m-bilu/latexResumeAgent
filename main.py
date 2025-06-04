@@ -22,8 +22,4 @@ if __name__ == '__main__':
             ## --- Invoking Graph Agent --- ##
             agent = init_agent()
             result = agent.invoke({ 'resume' : texstring, 'jd' : jdstring })
-            print('\nRewritten Resume Latex:\n <--------------------------------------->')
             print(result['new_resume'] if 'new_resume' in result else 'No New Resume')
-            print('\nFinal State\n <--------------------------------------->')
-
-            print(json.dumps(result, indent=4))

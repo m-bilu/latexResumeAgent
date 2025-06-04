@@ -5,3 +5,9 @@ cohere
 
 langgraph
 langchain-community
+
+streamlit
+streamlit-pdf-viewer
+
+chromadb  
+pylatexenc
