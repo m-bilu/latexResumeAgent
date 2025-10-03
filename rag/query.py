@@ -2,7 +2,7 @@ from langchain.vectorstores import Chroma
 from langchain.embeddings import CohereEmbeddings
 import os
 
-COHERE_API_KEY=os.environ['COHERE_API_KEY']
+COHERE_API_KEY=os.environ['CO_API_KEY']
 
 def query_vectorstore(query: str, k=5):
     db = Chroma(

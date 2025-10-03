@@ -3,19 +3,18 @@ This file contains all tools for identify_pros_cons node
 Tools can include python methods, LLMChains, independent sub-Agents
 '''
 
-from langchain_cohere import ChatCohere
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.schema.runnable import RunnableSequence
+
+from nodes.config import llm
 
 
 ##
 ## --- LLMChains ---
 ##
 
-def get_suggestions_llmchains(
-    llm: BaseChatModel = ChatCohere(model="command-r-plus", temperature=0)
-    ) -> RunnableSequence:
+def get_suggestions_llmchains() -> RunnableSequence:
     '''
     Method to return an LLMChain for getting suggestions
     '''
@@ -48,4 +47,3 @@ def get_suggestions_llmchains(
 
     return chain
 
-    

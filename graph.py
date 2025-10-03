@@ -1,4 +1,3 @@
-from langchain_cohere import ChatCohere
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.state import CompiledStateGraph
 from langchain_core.runnables import RunnableLambda
@@ -10,7 +9,7 @@ import re
 import json
 
 from schema import AgentState
-from nodes import gap_analysis, parse_resume, parse_jd, edit_resume, latex_validator
+from nodes import gap_analysis, parse_resume, parse_jd, edit_resume
 
 ## --- Nodes of High-Level Agent Graph ---
 ##
@@ -27,11 +26,8 @@ def parse_resume_node(state: AgentState) -> AgentState:
     3) Combine sections with existing info from datasource (excel sheet?)
     '''
     print('parsing resume ...')
-    state['resume'] = parse_resume.remove_unnecessary_tags(content=state['resume'])
-    sections = parse_resume.parse_sections(state['resume'])
-    for section, tex in sections.items():
-        sections[section] = parse_resume.parse_subheadings(tex)
-    
+    sections = parse_resume.parse_pdf(state['resume'])
+
     return {**state, 'resume_sections': sections}
 
 def parse_jd_node(state: AgentState) -> AgentState:
@@ -40,7 +36,7 @@ def parse_jd_node(state: AgentState) -> AgentState:
     Strata as in:
     - jd summary
     - low-level skills like tools, languages (Hard|Soft)
-    - high-level skills like workflows, disciplines 
+    - high-level skills like workflows, disciplines
         (data engineering vs data science vs ai engineering vs applied mle)
     - preferred background
     - key responsibilities (can the resume person fulfil them?)
@@ -59,7 +55,7 @@ def parse_jd_node(state: AgentState) -> AgentState:
     }).content for target, chain in chains.items()}
 
     return {**state, "jd_sections" : insights}
-    
+
 
 def identify_pros_cons_node(state: AgentState) -> AgentState:
     '''
@@ -83,7 +79,7 @@ def identify_pros_cons_node(state: AgentState) -> AgentState:
     output = re.sub(r"^```json|```$", "", insight.strip()).strip()
 
     return {**state, "suggestions": output}
-    
+
 
 def make_resume_edits_node(state: AgentState) -> AgentState:
     '''
@@ -93,26 +89,16 @@ def make_resume_edits_node(state: AgentState) -> AgentState:
     print('making resume edits, rendering ...')
     chain = edit_resume.get_resume_edit_chain()
 
-    latex = chain.invoke({
-        "resume_latex" : state['resume'],
+    pdfstring = chain.invoke({
+        "resume" : state['resume'],
         "jd_text" : state["jd"],
         "suggestions_json" : state["suggestions"]
     }).content
 
-    return {**state, "new_resume" : latex}
-
-# def final_validator_node(state: AgentState) -> AgentState:
-#     '''
-#     This node takes the final new resume and cleans up any pre-existing latex issues
-#         - misspellings, latex bugs, unneeded comments
-#         - also addresses any new issues that may have appeared as hallucinations between resume and new_resume
-#     '''
-#     new_resume=latex_validator.get_latex_no_comments(state['new_resume_unvalidated'])
-
-#     return {**state, "new_resume" : new_resume}
+    return {**state, "new_resume" : pdfstring}
 
 ##
-## --- Agent Initialization --- 
+## --- Agent Initialization ---
 ##
 
 def init_agent() -> CompiledStateGraph:
@@ -126,15 +112,12 @@ def init_agent() -> CompiledStateGraph:
     graph.add_node("parse_jd_node", parse_jd_node)
     graph.add_node("identify_pros_cons_node", identify_pros_cons_node)
     graph.add_node("make_resume_edits_node", make_resume_edits_node)
-#    graph.add_node("final_validator_node", final_validator_node)
 
     graph.add_edge(START, "parse_resume_node")
     graph.add_edge("parse_resume_node", "parse_jd_node")
     graph.add_edge("parse_jd_node", "identify_pros_cons_node")
     graph.add_edge("identify_pros_cons_node", "make_resume_edits_node")
     graph.add_edge("make_resume_edits_node", END)
-    # graph.add_edge("make_resume_edits_node", "final_validator_node")
-    # graph.add_edge("final_validator_node", END)
 
     agent_instance = graph.compile()
 
@@ -142,6 +125,20 @@ def init_agent() -> CompiledStateGraph:
 
 def modify_resume(old_resume: str, jd: str) -> str:
     agent = init_agent()
-    new_resume = agent.invoke({ 'resume' : old_resume, 'jd' : jd })['new_resume']
-    return new_resume
+
+    try:
+        state = { 'resume': old_resume, 'jd': jd }
+        final_state = None
+
+        for event in agent.stream(state, stream_mode="values"):
+            print("=== Event ===")
+            print(json.dumps(event, indent=4, ensure_ascii=False))
+            final_state = event
+
+        return final_state['new_resume']
+    except Exception as e:
+        print("❌ Agent failed:", e, "\n\n")
+        print("=== Last Known State === \n\n")
+        print(json.dumps(final_state, indent=2, ensure_ascii=False))
+        raise
 

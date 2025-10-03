@@ -3,26 +3,22 @@ This file contains all tools for gap_analysis node
 Tools can include python methods, LLMChains, independent sub-Agents
 '''
 
-from langchain_cohere import ChatCohere
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.schema.runnable import RunnableSequence
 import json
+
+from nodes.config import llm
 
 
 ##
 ## --- LLMChains ---
 ##
 
-def get_suggestions_llmchains(
-    llm: BaseChatModel | None = None
-    ) -> RunnableSequence:
+def get_suggestions_llmchains() -> RunnableSequence:
     '''
     Method to return an LLMChain for getting suggestions
     '''
-
-    if llm == None:
-        llm = ChatCohere(model="command-r-plus", temperature=0)
 
     prompt = f"""
         You are a resume-job description alignment expert.
@@ -47,4 +43,3 @@ def get_suggestions_llmchains(
 
     return chain
 
-    
