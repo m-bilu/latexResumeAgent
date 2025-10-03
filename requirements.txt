@@ -11,3 +11,4 @@ streamlit-pdf-viewer
 
 chromadb  
 pylatexenc
+pdfplumber
